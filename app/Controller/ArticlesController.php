@@ -5,6 +5,10 @@ class ArticlesController extends AppController {
 		
 	}
 	
+	function view() {
+		
+	}
+	
 	function search() {
 		
 	}

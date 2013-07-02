@@ -187,10 +187,18 @@
  * the cake shell command: cake schema create Sessions
  *
  */
+	$iniSettings = array();
+	if (class_exists('Memcache')) {
+		$iniSettings = array(
+			"session.save_handler" => "memcache",
+			"session.save_path" => "tcp://127.0.0.1:11211",
+			"session.gc_maxlifetime" => 86400
+		);
+	}
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'defaults' => 'php',
+		"ini" => $iniSettings
 	));
-
 /**
  * A random string used in security hashing methods.
  */
@@ -313,6 +321,11 @@
  *       and their settings.
  */
 $engine = 'File';
+if (class_exists('Memcache')) {
+	$engine = 'Memcache';
+} else {
+	$engine = 'File';
+}
 
 // In development mode, caches should expire quickly.
 $duration = '+999 days';

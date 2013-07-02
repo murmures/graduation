@@ -25,7 +25,11 @@
  */
 
 // Setup a 'default' cache configuration for use in the application.
-Cache::config('default', array('engine' => 'File'));
+if (class_exists('Memcache')) {
+	Cache::config('default', array('engine' => 'Memcache'));
+} else {
+	Cache::config('default', array('engine' => 'File'));
+}
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.

@@ -1,0 +1,1 @@
+<p class="font11">&copy; Company 2013</p>

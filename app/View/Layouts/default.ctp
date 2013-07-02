@@ -1,62 +1,49 @@
-<?php
-/**
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-?>
 <!DOCTYPE html>
-<html>
-<head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $title_for_layout; ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+<html lang="zh-cn" xmlns:wb=“http://open.weibo.com/wb”>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			中南大学网络教育学院毕业学位管理 | <?php echo $title_for_layout; ?>
+		</title>
+		<?php
+			echo $this->Html->meta('icon');
+			echo $this->Html->css(array(
+				"/glyphicons/css/glyphicons",
+				"/bootstrap/css/bootstrap.min.css",
+				"bootstrap-mod",
+				"app.custom",
+			));
+			// if (file_exists(WWW_ROOT.DS."css".DS.$this->params["controller"].".css")) echo $this->Html->css($this->params["controller"]);
+			// if (file_exists(WWW_ROOT.DS."css".DS.$this->params["controller"]."-".$this->params["action"].".css")) echo $this->Html->css($this->params["controller"]."-".$this->params["action"]);
+			
+			echo $this->Html->script(array(
+				'jquery.min.js',
+				'jquery.form.min',
+				"/bootstrap/js/bootstrap.min.js",
+				"app.common"
+			));
+			echo $this->fetch('meta');
+			echo $this->fetch('css');
+			echo $this->fetch('script');
+		?>
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<?php echo $this->Html->script("html5shiv"); ?>
+		<![endif]-->
+	</head>
+	
+	<body class="<?php echo $this->params->controller; ?>">
+		<div class="main container">
+			<?php echo $this->element("struct/header");?>
+			<div class="row-fluid">
+				<?php echo $this->fetch('content'); ?>
+				<div id="right-sidebar" class="span3">
+					<?php echo $this->element("struct/right-sidebar");?>
+				</div>
+			</div>
+			<hr />
+			<?php echo $this->element("struct/footer");?>
 		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
-</body>
+		<?php if (isset($_GET["sql"])) echo $this->element('sql_dump'); ?>
+	</body>
 </html>

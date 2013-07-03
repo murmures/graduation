@@ -7,19 +7,19 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
   	<div class="item thumbnail active">
-  		<a href="#"><img src="img/flash1.png" width="530" height="210" alt=""></a>
+  		<a href="#"><?php echo $this->Html->image('flash1.png', array('alt' => '', 'width'=>'530', 'height' => '210'));?></a>
       <div class="carousel-caption">
         <p class="font12">毕业散文征集</p>
       </div>
     </div>
     <div class="item thumbnail">
-  		<a href="#"><img src="img/flash2.png" width="530" height="210" alt=""></a>
+  		<a href="#"><?php echo $this->Html->image('flash2.png', array('alt' => '', 'width'=>'530', 'height' => '210'));?></a>
       <div class="carousel-caption">
         <p class="font12">优秀毕业生评选</p>
       </div>
     </div>
     <div class="item thumbnail">
-  		<a href="#"><img src="img/flash3.png" width="530" height="210" alt=""></a>
+  		<a href="#"><?php echo $this->Html->image('flash3.png', array('alt' => '', 'width'=>'530', 'height' => '210'));?></a>
       <div class="carousel-caption">
         <p class="font12">举行答辩工作的通知</p>
       </div>

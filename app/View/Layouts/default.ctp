@@ -36,7 +36,12 @@
 		<div class="main container">
 			<?php echo $this->element("struct/header");?>
 			<div class="row-fluid">
-				<?php echo $this->fetch('content'); ?>
+				<div class="span2">
+					<?php echo $this->fetch('sidebar'); ?>
+				</div>
+				<div class="span7 row">
+					<?php echo $this->fetch('content'); ?>
+				</div>
 				<div id="right-sidebar" class="span3">
 					<?php echo $this->element("struct/right-sidebar");?>
 				</div>

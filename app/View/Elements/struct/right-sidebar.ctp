@@ -1,8 +1,8 @@
 <div>
-	<a href="#" class="thumbnail"><img src="img/link1.png" width="210" hight="100" alt=""></a>
+	<a href="#" class="thumbnail"><?php echo $this->Html->image('link1.png', array('alt' => '', 'width'=>'210', 'height' => '100'));?></a>
 </div>
 <div>
-  <a href="#" class="thumbnail"><img src="img/link2.png" width="210" hight="100" alt=""></a>
+  <a href="#" class="thumbnail"><?php echo $this->Html->image('link2.png', array('alt' => '', 'width'=>'210', 'height' => '100'));?></a>
 </div>
 <div>
   <h3><i class='glyphicons-icon black search'></i>证书查询</h3>

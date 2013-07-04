@@ -26,6 +26,10 @@ body {
 	padding-bottom: 25px;
 }
 
+p	{
+	text-indent: 2em;
+}
+
 #tags ul {
 	margin:1em 0;
 	padding:.5em 10px;

@@ -26,8 +26,16 @@ body {
 	padding-bottom: 25px;
 }
 
-p	{
+.span7 p	{
 	text-indent: 2em;
+}
+
+#footer p {
+	text-align: center;
+}
+
+.article-title h4 {
+	text-align: center;
 }
 
 #tags ul {

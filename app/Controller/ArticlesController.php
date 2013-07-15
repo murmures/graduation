@@ -1,16 +1,33 @@
 <?php
 class ArticlesController extends AppController {
-	public $uses = array("Article");
+	public $uses = array("Article", "Slide");
 
 	function beforeFilter() {
+		$slides = $this->Slide->find("all");
+		$this->set(compact('slides'));
+		
 		$referer = $this->referer();
 		$this->set(compact('referer'));
+
+		$cat = $this->Article->Category->findByAlias("faq");
+		$faqs = $this->Article->find("all", 
+			array(
+				"conditions" => array(
+					"Article.category_id" => $cat["Category"]["id"]
+				),
+				"limit" => 4
+		));
+		$this->set(compact('faqs'));
 	}
 
 	function index() {
+		$faq_cat = $this->Article->Category->findByAlias("faq");
 		$articles = $this->Article->find('all', 
 			array(
-				"contain" => array("Category")
+				"contain" => array("Category"),
+				"conditions" => array(
+					"Article.category_id <>" => $faq_cat["Category"]["id"]
+				)
 		));
 		$this->set(compact('articles'));
 	}
@@ -29,20 +46,12 @@ class ArticlesController extends AppController {
 	}
 	
 	function notification() {
-		$category = $this->Article->Category->find('first', 
-			array(
-				"conditions" => array(
-					"alias" => 'notification'
-				),
-				"fields" => array(
-					"id"
-				)
-		));
+		$cat = $this->Article->Category->findByAlias('notification');
 		$articles = $this->Article->find('all', 
 			array(
 				"contain" => array("Category"),
 				"conditions" => array(
-					"category_id" => $category['Category']['id']
+					"category_id" => $cat['Category']['id']
 				)
 		));
 		$this->set(compact('articles'));
@@ -65,6 +74,14 @@ class ArticlesController extends AppController {
 	}
 	
 	function faq() {
-		
+		$cat = $this->Article->Category->findByAlias('faq');
+		$articles = $this->Article->find('all', 
+			array(
+				"contain" => array("Category"),
+				"conditions" => array(
+					"category_id" => $cat['Category']['id']
+				)
+		));
+		$this->set(compact('articles'));
 	}
 }

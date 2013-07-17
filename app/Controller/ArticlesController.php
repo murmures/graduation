@@ -58,7 +58,15 @@ class ArticlesController extends AppController {
 	}
 	
 	function task() {
-		
+		$cat = $this->Article->Category->findByAlias('task');
+		$articles = $this->Article->find('all', 
+			array(
+				"contain" => array("Category"),
+				"conditions" => array(
+					"category_id" => $cat['Category']['id']
+				)
+		));
+		$this->set(compact('articles'));
 	}
 	
 	function guide() {
@@ -70,6 +78,10 @@ class ArticlesController extends AppController {
 	}
 	
 	function lecture() {
+		
+	}
+	
+	function degree() {
 		
 	}
 	

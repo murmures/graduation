@@ -20,7 +20,7 @@
           <!--
           	<li class="<?php if ($uri == "articles-download"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/download')?>"><i class='icon-download-alt'></i> 文件下载</a></li>
           -->
-          <li class="<?php if ($uri == "articles-lecture"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/lecture')?>"><i class='icon-user'></i> 毕业论文讲座</a></li>
+          <li class="<?php if ($uri == "articles-lecture"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/lecture')?>"><i class='icon-headphones'></i> 毕业论文讲座</a></li>
           <li class="<?php if ($uri == "articles-degree"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/degree')?>"><i class='icon-user'></i> 学位管理</a></li>
        	</ul>
        	<ul class="nav pull-right">

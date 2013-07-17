@@ -1,6 +1,6 @@
 <?php
 class ArticlesController extends AppController {
-	public $uses = array("Article", "Slide");
+	public $uses = array("Article", "Slide", "File");
 
 	function beforeFilter() {
 		$slides = $this->Slide->find("all");
@@ -15,6 +15,9 @@ class ArticlesController extends AppController {
 				"conditions" => array(
 					"Article.category_id" => $cat["Category"]["id"]
 				),
+				"order" => array(
+					"Article.created DESC"
+				),
 				"limit" => 4
 		));
 		$this->set(compact('faqs'));
@@ -27,6 +30,9 @@ class ArticlesController extends AppController {
 				"contain" => array("Category"),
 				"conditions" => array(
 					"Article.category_id <>" => $faq_cat["Category"]["id"]
+				),
+				"order" => array(
+					"Article.created DESC"
 				)
 		));
 		$this->set(compact('articles'));
@@ -52,6 +58,9 @@ class ArticlesController extends AppController {
 				"contain" => array("Category"),
 				"conditions" => array(
 					"category_id" => $cat['Category']['id']
+				),
+				"order" => array(
+					"Article.created DESC"
 				)
 		));
 		$this->set(compact('articles'));
@@ -64,6 +73,9 @@ class ArticlesController extends AppController {
 				"contain" => array("Category"),
 				"conditions" => array(
 					"category_id" => $cat['Category']['id']
+				),
+				"order" => array(
+					"Article.created DESC"
 				)
 		));
 		$this->set(compact('articles'));
@@ -74,7 +86,8 @@ class ArticlesController extends AppController {
 	}
 	
 	function download() {
-		
+		$files = $this->File->find('all');
+		$this->set(compact('files'));
 	}
 	
 	function lecture() {
@@ -92,6 +105,9 @@ class ArticlesController extends AppController {
 				"contain" => array("Category"),
 				"conditions" => array(
 					"category_id" => $cat['Category']['id']
+				),
+				"order" => array(
+					"Article.created DESC"
 				)
 		));
 		$this->set(compact('articles'));

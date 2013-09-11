@@ -1,4 +1,4 @@
-<div class="thumbnail"><?php echo $this->Html->image('banner.png', array('alt' => '', 'width'=>'940', 'height' => '100'));?></div>
+<div class=""><?php echo $this->Html->image('banner.png', array('alt' => '', 'width'=>'940', 'height' => '140'));?></div>
 <!-- navbar -->
 <div class="navbar">
   <div class="navbar-inner">

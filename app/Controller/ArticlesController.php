@@ -81,8 +81,52 @@ class ArticlesController extends AppController {
 		$this->set(compact('articles'));
 	}
 	
-	function guide() {
-		
+	function guide($params = "all") {
+		switch ($params) {
+			case 'all':
+				$parent_cat = $this->Article->Category->findByAlias("guide");
+				if (!empty($parent_cat)) {
+					$cats = $this->Article->Category->find("all", 
+						array(
+							"conditions" => array(
+								"parent_id" => $parent_cat['Category']['id']
+							)
+					));
+					if (!empty($cats)) {
+						foreach ($cats as $cat) {
+							$cat_ids[] = $cat['Category']['id'];
+						}
+						$articles = $this->Article->find('all', 
+							array(
+								"contain" => array("Category"),
+								"conditions" => array(
+									"category_id" => $cat_ids
+								),
+								"order" => array(
+									"Article.created DESC"
+								)
+						));
+						$this->set(compact('articles'));
+					}
+				}
+				break;
+			default:
+				$cat = $this->Article->Category->findByAlias($params);
+				if (!empty($cat)) {
+					$articles = $this->Article->find('all', 
+						array(
+							"contain" => array("Category"),
+							"conditions" => array(
+								"category_id" => $cat['Category']['id']
+							),
+							"order" => array(
+								"Article.created DESC"
+							)
+					));
+					$this->set(compact('articles'));
+				}
+				break;
+		}
 	}
 	
 	function download() {

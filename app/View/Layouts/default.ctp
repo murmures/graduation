@@ -19,6 +19,7 @@
 			echo $this->Html->script(array(
 				'jquery.min.js',
 				'jquery.form.min',
+				"holder.js",
 				"/bootstrap/js/bootstrap.min.js",
 				"app.common"
 			));

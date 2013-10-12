@@ -38,6 +38,14 @@ class ArticlesController extends AppController {
 		$this->set(compact('articles'));
 	}
 	
+	function edit($id) {
+		if (!empty($this->data)) {
+			debug($this->data);
+		}
+		$article = $this->Article->findById($id);
+		$this->set(compact('article'));
+	}
+	
 	function view($id) {
 		$article = $this->Article->findById($id);
 		$this->set(compact('article'));

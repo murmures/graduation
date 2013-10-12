@@ -38,6 +38,13 @@ body {
 	text-align: center;
 }
 
+table.lecture th {
+	text-align: center;
+}
+table.lecture td.center {
+	text-align: center;
+}
+
 #tags ul {
 	margin:1em 0;
 	padding:.5em 10px;

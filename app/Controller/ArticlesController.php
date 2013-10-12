@@ -135,7 +135,99 @@ class ArticlesController extends AppController {
 	}
 	
 	function lecture() {
-		
+		$lectures = array(
+			array(
+				"name" => "法学专业毕业论文讲座",
+				"teacher" => "邵华",
+				"major" => "法学",
+				"title" => "副教授",
+				"course" => "证据法学",
+				"img" => "lecture-thumbnail-1.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=1"
+			),
+			array(
+				"name" => "工商管理专业毕业论文讲座",
+				"teacher" => "陈明淑",
+				"major" => "工商管理",
+				"title" => "副教授",
+				"course" => "人力资源管理（专科）",
+				"img" => "lecture-thumbnail-2.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=2"
+			),
+			array(
+				"name" => "护理学专业毕业论文讲座",
+				"teacher" => "阳爱云",
+				"major" => "护理学",
+				"title" => "副教授",
+				"course" => "护理学基础",
+				"img" => "lecture-thumbnail-3.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=3"
+			),
+			array(
+				"name" => "计算机专业毕业论文讲座",
+				"teacher" => "严晖",
+				"major" => "计算机科学与技术",
+				"title" => "副教授",
+				"course" => "C++程序设计",
+				"img" => "lecture-thumbnail-4.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=4"
+			),
+			array(
+				"name" => "行政管理专业毕业论文讲座",
+				"teacher" => "许源源",
+				"major" => "行政管理",
+				"title" => "副教授",
+				"course" => "行政组织学",
+				"img" => "lecture-thumbnail-5.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=5"
+			),
+			array(
+				"name" => "交通运输毕业论文讲座",
+				"teacher" => "叶峻青",
+				"major" => "交通运输",
+				"title" => "副教授",
+				"course" => "铁路运输设备",
+				"img" => "lecture-thumbnail-6.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=6"
+			),
+			array(
+				"name" => "会计学毕业论文讲座",
+				"teacher" => "易玄",
+				"major" => "会计学",
+				"title" => "副教授",
+				"course" => "中级财务会计",
+				"img" => "lecture-thumbnail-7.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=7"
+			),
+			array(
+				"name" => "汉语言文学毕业论文讲座",
+				"teacher" => "刘青松",
+				"major" => "汉语言文学",
+				"title" => "教授",
+				"course" => "古代汉语",
+				"img" => "lecture-thumbnail-8.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=8"
+			),
+			array(
+				"name" => "机械自动化毕业论文讲座",
+				"teacher" => "廖平",
+				"major" => "机械设计与自动化",
+				"title" => "教授",
+				"course" => "",
+				"img" => "lecture-thumbnail-9.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=9"
+			),
+			array(
+				"name" => "土木工程毕业论文讲座",
+				"teacher" => "娄平",
+				"major" => "土木工程",
+				"title" => "教授",
+				"course" => "",
+				"img" => "lecture-thumbnail-10.jpg",
+				"link" => "http://www.cnecsu.cn/open/byvideo.html?id=10"
+			),
+		);
+		$this->set(compact('lectures'));
 	}
 	
 	function degree() {

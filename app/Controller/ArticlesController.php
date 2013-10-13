@@ -9,6 +9,9 @@ class ArticlesController extends AppController {
 		$referer = $this->referer();
 		$this->set(compact('referer'));
 
+		$tags = $this->Article->ArticlesTag->Tag->find("all");
+		$this->set(compact('tags'));
+
 		$cat = $this->Article->Category->findByAlias("faq");
 		$faqs = $this->Article->find("all", 
 			array(
@@ -39,11 +42,60 @@ class ArticlesController extends AppController {
 	}
 	
 	function edit($id) {
+		$categories = $this->Article->Category->find("list");
+		$this->set(compact('categories'));
+
+		$tags = $this->Article->ArticlesTag->Tag->find("all");
+		$this->set(compact('tags'));
+		$article = $this->Article->find("first", 
+			array(
+				"contain" => array(
+					"ArticlesTag"
+				),
+				"conditions" => array(
+					"Article.id" => $id
+				)
+		));
+		$this->set(compact('article'));
+
 		if (!empty($this->data)) {
 			debug($this->data);
+			$to_save_article["Article"]["category_id"] = $this->data["Article"]["category_id"];
+			
+			$this->Article->id = $id;
+			$this->Article->save($to_save_article);
+			
+			foreach ($this->data["Tag"] as $tag_id => $checked) {
+				$existed = false;
+				foreach ($article["ArticlesTag"] as $article_tag) {
+					if ($tag_id == $article_tag["tag_id"]) {
+						$existed = true;break;
+					}
+				}
+				if ($checked) {
+					if (!$existed) {
+						$this->Article->ArticlesTag->create();
+						$to_save_articles_tag["ArticlesTag"]["article_id"] = $article["Article"]["id"];
+						$to_save_articles_tag["ArticlesTag"]["tag_id"] = $tag_id;
+						$this->Article->ArticlesTag->save($to_save_articles_tag);
+					}
+				} else {
+					if ($existed) {
+						$to_delete_articles_tag = $this->Article->ArticlesTag->find("first", 
+							array(
+								"conditions" => array(
+									"ArticlesTag.article_id" => $article["Article"]["id"],
+									"ArticlesTag.tag_id" => $tag_id
+								)
+						));
+						$this->Article->ArticlesTag->delete($to_delete_articles_tag["ArticlesTag"]["id"]);
+					}
+				}
+			}
+			$this->Session->setFlash("Article Updated!");
+			$this->redirect("/edit/".$id);
 		}
-		$article = $this->Article->findById($id);
-		$this->set(compact('article'));
+		
 	}
 	
 	function view($id) {
@@ -55,8 +107,29 @@ class ArticlesController extends AppController {
 		
 	}
 	
-	function tag() {
-		
+	function tag($tag_id) {
+		$articles_tags = $this->Article->ArticlesTag->find("all", 
+			array(
+				"conditions" => array(
+					"ArticlesTag.tag_id" => $tag_id,
+				)
+		));
+		if (!empty($articles_tags)) {
+			foreach ($articles_tags as $articles_tag) {
+				$article_ids[] = $articles_tag["ArticlesTag"]["article_id"];
+			}
+			$articles = $this->Article->find('all', 
+				array(
+					"contain" => array("Category"),
+					"conditions" => array(
+						"Article.id" => $article_ids
+					),
+					"order" => array(
+						"Article.created DESC"
+					)
+			));
+			$this->set(compact('articles'));
+		}
 	}
 	
 	function notification() {

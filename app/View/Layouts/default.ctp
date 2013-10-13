@@ -41,6 +41,7 @@
 					<?php echo $this->fetch('sidebar'); ?>
 				</div>
 				<div class="span7 row">
+					<?php echo $this->Session->flash(); ?>
 					<?php echo $this->fetch('content'); ?>
 				</div>
 				<div id="right-sidebar" class="span3">

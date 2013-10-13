@@ -1,3 +1,3 @@
 <div id="category">
-	<?php echo $this->Form->input("类别", array("type"=>"select", "selected" => false, "options" => array("毕业通知","毕业生工作")))?>
+	<?php echo $this->Form->input("category_id", array("label" => "文章类别", "type"=>"select", "selected" => $article["Article"]["category_id"], "options" => $categories));?>
 </div>

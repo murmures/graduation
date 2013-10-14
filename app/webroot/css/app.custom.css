@@ -45,6 +45,10 @@ table.lecture td.center {
 	text-align: center;
 }
 
+div.article-tag {
+	text-align: center;
+}
+
 #tags ul {
 	margin:1em 0;
 	padding:.5em 10px;

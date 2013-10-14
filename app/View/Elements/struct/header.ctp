@@ -25,10 +25,18 @@
        	</ul>
        	<ul class="nav pull-right">
        		<li>
-       			<form class="navbar-form pull-right">
+<!--       	
+						<form class="navbar-form pull-right">
        				<input name="search" class="input-medium" placeholder="标题关键字" value="" type="text" id="ArticleSearch"/>
        				<button class="btn" type="text" autocomplete="off" data-loading-text="<i class='icon-time'></i> 搜索中"><i class="icon-search"></i> 搜索</button>
        			</form>
+-->
+       			<?php 
+       				echo $this->Form->create('Article', array("type" => "get", "action" => "search", "class" => array("navbar-form", "pull-right")));
+							echo $this->Form->input('Article.keyword', array("div" => false, "type" => "text", "label" => false, "placeholder" => "标题关键字", "class" => "input-medium"));
+       				// echo $this->Form->end("Submit");
+       			?>
+       			<button class="btn" type="text" autocomplete="off" data-loading-text="<i class='icon-time'></i> 搜索中"><i class="icon-search"></i> 搜索</button>
        		</li>
        	</ul> 	
       </div><!-- /.nav-collapse -->

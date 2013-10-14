@@ -1,7 +1,10 @@
 <?php
 	$this->extend('/Pages/home');
 ?>
-<?php echo $this->element("widget/slide"); ?>
+<?php 
+	if (!empty($this->params["pass"][0]) AND $this->params["pass"][0] == "all") {}
+	else echo $this->element("widget/slide"); 
+?>
 	
 <table class="table table-striped table-hover table-condensed">
 	<tbody>
@@ -10,4 +13,4 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-<a href="#"><span class="pull-right label label-info">更多</span></a>
+<a href="<?php echo $this->Html->url("/index/all");?>"><span class="pull-right label label-info">更多</span></a>

@@ -48,6 +48,8 @@
 					<?php echo $this->element("struct/right-sidebar");?>
 				</div>
 			</div>
+			<br />
+			<?php echo $this->element("struct/heel");?>
 			<hr />
 			<?php echo $this->element("struct/footer");?>
 		</div>

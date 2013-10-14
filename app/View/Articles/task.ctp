@@ -1,7 +1,6 @@
 <?php
 	$this->extend('/Pages/home');
 ?>
-	
 <table class="table table-striped table-hover table-condensed">
 	<tbody>
 		<?php foreach ($articles as $article):?>
@@ -9,4 +8,3 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-<a href="#"><span class="pull-right label label-info">更多</span></a>

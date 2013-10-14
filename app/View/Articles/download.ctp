@@ -9,4 +9,3 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-<a href="#"><span class="pull-right label label-info">更多</span></a>

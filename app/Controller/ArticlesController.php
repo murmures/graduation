@@ -26,18 +26,33 @@ class ArticlesController extends AppController {
 		$this->set(compact('faqs'));
 	}
 
-	function index() {
+	function index($pass = null) {
 		$faq_cat = $this->Article->Category->findByAlias("faq");
-		$articles = $this->Article->find('all', 
-			array(
-				"contain" => array("Category"),
-				"conditions" => array(
-					"Article.category_id <>" => $faq_cat["Category"]["id"]
-				),
-				"order" => array(
-					"Article.created DESC"
-				)
-		));
+		
+		if (!empty($pass) AND $pass == "all") {
+			$articles = $this->Article->find('all', 
+				array(
+					"contain" => array("Category"),
+					"conditions" => array(
+						"Article.category_id <>" => $faq_cat["Category"]["id"]
+					),
+					"order" => array(
+						"Article.created DESC"
+					)
+			));
+		} else {
+			$articles = $this->Article->find('all', 
+				array(
+					"contain" => array("Category"),
+					"conditions" => array(
+						"Article.category_id <>" => $faq_cat["Category"]["id"]
+					),
+					"order" => array(
+						"Article.created DESC"
+					),
+					"limit" => 10
+			));
+		}
 		$this->set(compact('articles'));
 	}
 	
@@ -50,7 +65,9 @@ class ArticlesController extends AppController {
 		$article = $this->Article->find("first", 
 			array(
 				"contain" => array(
-					"ArticlesTag"
+					"ArticlesTag" => array(
+						"Tag"
+					)
 				),
 				"conditions" => array(
 					"Article.id" => $id
@@ -92,19 +109,41 @@ class ArticlesController extends AppController {
 					}
 				}
 			}
-			$this->Session->setFlash("Article Updated!");
+			$this->Session->setFlash("文章已修改!");
 			$this->redirect("/edit/".$id);
 		}
 		
 	}
 	
 	function view($id) {
-		$article = $this->Article->findById($id);
+		$article = $this->Article->find("first", 
+			array(
+				"contain" => array(
+					"ArticlesTag" => array(
+						"Tag"
+					)
+				),
+				"conditions" => array(
+					"Article.id" => $id
+				)
+		));
 		$this->set(compact('article'));
 	}
 	
 	function search() {
-		
+		if (!empty($this->params->query["keyword"])) {
+			$articles = $this->Article->find('all', 
+				array(
+					"contain" => array("Category"),
+					"conditions" => array(
+						"Article.title LIKE" => "%".$this->params->query["keyword"]."%"
+					),
+					"order" => array(
+						"Article.created DESC"
+					)
+			));
+			$this->set(compact('articles'));
+		}
 	}
 	
 	function tag($tag_id) {
@@ -138,7 +177,7 @@ class ArticlesController extends AppController {
 			array(
 				"contain" => array("Category"),
 				"conditions" => array(
-					"category_id" => $cat['Category']['id']
+					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
 					"Article.created DESC"
@@ -153,7 +192,7 @@ class ArticlesController extends AppController {
 			array(
 				"contain" => array("Category"),
 				"conditions" => array(
-					"category_id" => $cat['Category']['id']
+					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
 					"Article.created DESC"
@@ -170,7 +209,7 @@ class ArticlesController extends AppController {
 					$cats = $this->Article->Category->find("all", 
 						array(
 							"conditions" => array(
-								"parent_id" => $parent_cat['Category']['id']
+								"Category.parent_id" => $parent_cat['Category']['id']
 							)
 					));
 					if (!empty($cats)) {
@@ -181,7 +220,7 @@ class ArticlesController extends AppController {
 							array(
 								"contain" => array("Category"),
 								"conditions" => array(
-									"category_id" => $cat_ids
+									"Article.category_id" => $cat_ids
 								),
 								"order" => array(
 									"Article.created DESC"
@@ -198,7 +237,7 @@ class ArticlesController extends AppController {
 						array(
 							"contain" => array("Category"),
 							"conditions" => array(
-								"category_id" => $cat['Category']['id']
+								"Article.category_id" => $cat['Category']['id']
 							),
 							"order" => array(
 								"Article.created DESC"
@@ -321,7 +360,7 @@ class ArticlesController extends AppController {
 			array(
 				"contain" => array("Category"),
 				"conditions" => array(
-					"category_id" => $cat['Category']['id']
+					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
 					"Article.created DESC"

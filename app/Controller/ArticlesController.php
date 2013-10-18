@@ -26,6 +26,69 @@ class ArticlesController extends AppController {
 		$this->set(compact('faqs'));
 	}
 
+	function test() {
+		mssql_connect("202.197.55.19:1433", "mis_lzl", "CSU_mis_lzl47894892");
+		mssql_select_db("Cne_edu");
+		// $sql = "SELECT * FROM dbo.FS_NS_BuzClass";
+		// $sql = "SELECT GETDATE()";
+		$sql = "SELECT * FROM FS_NS_BuzClass";
+		// $sql = "SELECT * FROM Fs_news_xygg WHERE BuzID=008";
+		$result = mssql_query($sql);
+		debug(mssql_num_rows($result));
+		debug($result);
+		// $row = mssql_fetch_array($result);
+		// debug($row);
+		
+		if (!mssql_num_rows($result)) {
+			echo 'No records found';
+		} else {
+	    while ($row = mssql_fetch_array($result)) {
+				debug($row);
+	    }
+		}
+		
+		mssql_free_result($result);die;
+	}
+
+	function test2() {
+		try { 
+			$hostname='202.197.55.19';//注意,这里和上面不同,要直接用IP地址或主机名 
+			$port=1433;//端口 
+			$dbname="Cne_edu";//库名 
+			$username="mis_lzl";//用户 
+			$pw="CSU_mis_lzl47894892";//密码 
+			$dbh= new PDO("dblib:host=$hostname:$port;dbname=$dbname","$username","$pw"); 
+		} catch (PDOException $e) { 
+			echo"Failed to get DB handle: ".$e->getMessage() ."\n"; 
+			exit; 
+		} 
+		echo'connent MSSQL succeed'; 
+			// $stmt=$dbh->prepare("SELECT * FROM FS_NS_BuzClass"); 
+			$stmt=$dbh->prepare("SELECT * FROM  Fs_news_xygg WHERE BuzID=008"); 
+			$stmt->execute(); 
+			while ($row=$stmt->fetch()) { 
+			print_r($row); 
+		} 
+		unset($dbh); unset($stmt); die;
+	}
+	
+	function test3() {
+		debug(PDO::getAvailableDrivers());
+		
+		$sqlserver_connected = true;
+		
+		$appDbConfig = new DATABASE_CONFIG();
+		if (isset($appDbConfig->mssql)) {
+			$db = @ConnectionManager::getDataSource("mssql");
+			if (!$db->connected) {
+				$sqlserver_connected = false;
+			}
+		} else {
+			$sqlserver_connected = false;
+		}
+		debug($sqlserver_connected);
+	}
+
 	function index($pass = null) {
 		$faq_cat = $this->Article->Category->findByAlias("faq");
 		

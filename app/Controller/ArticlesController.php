@@ -57,36 +57,63 @@ class ArticlesController extends AppController {
 			$dbname="Cne_edu";//库名 
 			$username="mis_lzl";//用户 
 			$pw="CSU_mis_lzl47894892";//密码 
-			$dbh= new PDO("dblib:host=$hostname:$port;dbname=$dbname","$username","$pw"); 
+			$dbh= new PDO("dblib:host=$hostname:$port;dbname=$dbname", "$username", "$pw"); 
 		} catch (PDOException $e) { 
 			echo"Failed to get DB handle: ".$e->getMessage() ."\n"; 
 			exit; 
 		} 
-		echo'connent MSSQL succeed'; 
+		// echo'connent MSSQL succeed'; 
 			// $stmt=$dbh->prepare("SELECT * FROM FS_NS_BuzClass"); 
-			$stmt=$dbh->prepare("SELECT * FROM  Fs_news_xygg WHERE BuzID=008"); 
+			$stmt=$dbh->prepare("SELECT id,title,data FROM  Fs_news_xygg WHERE BuzID=007 AND data >= '2012-01-01' ORDER BY data DESC"); 
 			$stmt->execute(); 
 			while ($row=$stmt->fetch()) { 
-			print_r($row); 
+			debug($row); 
 		} 
 		unset($dbh); unset($stmt); die;
 	}
 	
-	function test3() {
-		debug(PDO::getAvailableDrivers());
-		
-		$sqlserver_connected = true;
-		
-		$appDbConfig = new DATABASE_CONFIG();
-		if (isset($appDbConfig->mssql)) {
-			$db = @ConnectionManager::getDataSource("mssql");
-			if (!$db->connected) {
-				$sqlserver_connected = false;
-			}
-		} else {
-			$sqlserver_connected = false;
+	function import_news($type = "graduation") {
+		try { 
+			$hostname='202.197.55.19';//注意,这里和上面不同,要直接用IP地址或主机名 
+			$port=1433;//端口 
+			$dbname="Cne_edu";//库名 
+			$username="mis_lzl";//用户 
+			$pw="CSU_mis_lzl47894892";//密码 
+			$dbh= new PDO("dblib:host=$hostname:$port;dbname=$dbname", "$username", "$pw"); 
+		} catch (PDOException $e) { 
+			echo"Failed to get DB handle: ".$e->getMessage() ."\n"; 
+			exit; 
 		}
-		debug($sqlserver_connected);
+		switch ($type) {
+			case "graduation":
+				$type_id = "007";
+				$category_id = 1;
+				break;
+			case "degree":
+				$type_id = "008";
+				$category_id = 8;
+				break;
+			default:
+				break;
+		}
+		if (!empty($type_id)) {
+			$stmt=$dbh->prepare("SELECT id,title,data FROM Fs_news_xygg WHERE BuzID={$type_id} AND data >= '2000-01-01' ORDER BY data DESC"); 
+			$stmt->execute();
+			while ($row = $stmt->fetch()) {
+				unset($article);
+				$article["Article"]["external_id"] = $row["id"];
+				$article["Article"]["category_id"] = $category_id;
+				$article["Article"]["title"] = $row["title"];
+				$article["Article"]["created"] = date("Y-m-d H:i:s", strtotime($row["data"]));
+				debug($article);
+				$exist_article = $this->Article->findByExternalId($row["id"]);
+				if (empty($exist_article)) {
+					$this->Article->create();
+					$this->Article->save($article);
+				}
+			}
+		}
+		die;
 	}
 
 	function index($pass = null) {

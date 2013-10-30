@@ -1,6 +1,7 @@
 <?php
 class ArticlesController extends AppController {
 	public $uses = array("Article", "Slide", "File");
+	public $components = array("Paginator");
 
 	function beforeFilter() {
 		$slides = $this->Slide->find("all");
@@ -64,7 +65,7 @@ class ArticlesController extends AppController {
 		} 
 		// echo'connent MSSQL succeed'; 
 			// $stmt=$dbh->prepare("SELECT * FROM FS_NS_BuzClass"); 
-			$stmt=$dbh->prepare("SELECT id,title,data FROM  Fs_news_xygg WHERE BuzID=007 AND data >= '2012-01-01' ORDER BY data DESC"); 
+			$stmt=$dbh->prepare("SELECT id,title,data FROM Fs_news_xygg WHERE BuzID=007 AND data >= '2012-01-01' ORDER BY data DESC"); 
 			$stmt->execute(); 
 			while ($row=$stmt->fetch()) { 
 			debug($row); 
@@ -120,16 +121,18 @@ class ArticlesController extends AppController {
 		$faq_cat = $this->Article->Category->findByAlias("faq");
 		
 		if (!empty($pass) AND $pass == "all") {
-			$articles = $this->Article->find('all', 
-				array(
-					"contain" => array("Category"),
-					"conditions" => array(
-						"Article.category_id <>" => $faq_cat["Category"]["id"]
-					),
-					"order" => array(
-						"Article.created DESC"
-					)
-			));
+			$this->paginate = array(
+				"limit" => 10,
+				"contain" => array("Category"),
+				"conditions" => array(
+					"Article.category_id <>" => $faq_cat["Category"]["id"]
+				),
+				"order" => array(
+					"Article.created DESC"
+				),
+			);
+			
+			$articles = $this->paginate("Article");
 		} else {
 			$articles = $this->Article->find('all', 
 				array(
@@ -143,6 +146,24 @@ class ArticlesController extends AppController {
 					"limit" => 10
 			));
 		}
+		
+		$this->set(compact('articles'));
+	}
+	
+	function all() {
+		$faq_cat = $this->Article->Category->findByAlias("faq");
+		$this->paginate = array(
+			"limit" => 10,
+			"contain" => array("Category"),
+			"conditions" => array(
+				"Article.category_id <>" => $faq_cat["Category"]["id"]
+			),
+			"order" => array(
+				"Article.created DESC"
+			),
+		);
+		
+		$articles = $this->paginate("Article");
 		$this->set(compact('articles'));
 	}
 	

@@ -13,4 +13,4 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-<a href="<?php echo $this->Html->url("/index/all");?>"><span class="pull-right label label-info">更多</span></a>
+<a href="<?php echo $this->Html->url("/articles/all");?>"><span class="pull-right label label-info">更多</span></a>

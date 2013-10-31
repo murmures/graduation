@@ -9,7 +9,8 @@
 				<div class="row-fluid">
 					<div class="span5 thumbnail margin-left5">
 						<!--<img src="holder.js/210x100">-->
-						<img src="img/<?php echo $lecture["img"];?>" alt=""/>
+						<?php echo $this->Html->image($lecture["img"]);?>
+						<!--<img src="/img/<?php echo $lecture["img"];?>" alt=""/>-->
 					</div>
 					<div class="span6 pull-right">
 						<table class="lecture table-condensed">

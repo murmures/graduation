@@ -15,7 +15,7 @@
 					$class = "tag5";
 				} 
 			?>
-			<li class="<?php echo $class;?>"><a href="<?php echo $this->Html->url("/tag/{$tag["Tag"]["id"]}");?>"><?php echo $tag["Tag"]["title"];?></a></li> 
+			<li class="<?php echo $class;?>"><a href="<?php echo $this->Html->url("/articles/tag/{$tag["Tag"]["id"]}");?>"><?php echo $tag["Tag"]["title"];?></a></li> 
 		<?php endforeach; ?>
 	</ul>
 </div>

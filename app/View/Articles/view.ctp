@@ -6,7 +6,7 @@
 <?php
 	if (!empty($article["ArticlesTag"])) {
 		foreach ($article["ArticlesTag"] as $article_tag) {
-			echo "&nbsp;&nbsp;".$this->Html->link($article_tag["Tag"]["title"], "/tag/{$article_tag["Tag"]["id"]}");
+			echo "&nbsp;&nbsp;".$this->Html->link($article_tag["Tag"]["title"], "/articles/tag/{$article_tag["Tag"]["id"]}");
 		}
 	}
 ?>

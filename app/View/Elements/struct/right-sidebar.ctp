@@ -1,8 +1,8 @@
 <div>
-	<a href="<?php echo $this->Html->url("/view/27");?>" class="thumbnail"><?php echo $this->Html->image('link1.png', array('alt' => '', 'width'=>'210', 'height' => '100'));?></a>
+	<a href="<?php echo $this->Html->url("/articles/view/27");?>" class="thumbnail"><?php echo $this->Html->image('link1.png', array('alt' => '', 'width'=>'210', 'height' => '100'));?></a>
 </div>
 <div>
-  <a href="<?php echo $this->Html->url("/view/26");?>" class="thumbnail"><?php echo $this->Html->image('link2.png', array('alt' => '', 'width'=>'210', 'height' => '100'));?></a>
+  <a href="<?php echo $this->Html->url("/articles/view/26");?>" class="thumbnail"><?php echo $this->Html->image('link2.png', array('alt' => '', 'width'=>'210', 'height' => '100'));?></a>
 </div>
 <div>
   <a href="#" class="thumbnail"><?php echo $this->Html->image('link3.png', array('alt' => '', 'width'=>'210', 'height' => '100'));?></a>

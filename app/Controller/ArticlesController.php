@@ -1,7 +1,7 @@
 <?php
 class ArticlesController extends AppController {
 	public $uses = array("Article", "Slide", "File");
-	public $components = array("Paginator");
+	public $components = array("Session", "Paginator");
 
 	function beforeFilter() {
 		$slides = $this->Slide->find("all");
@@ -153,13 +153,15 @@ class ArticlesController extends AppController {
 	function all() {
 		$faq_cat = $this->Article->Category->findByAlias("faq");
 		$this->paginate = array(
-			"limit" => 10,
-			"contain" => array("Category"),
-			"conditions" => array(
-				"Article.category_id <>" => $faq_cat["Category"]["id"]
-			),
-			"order" => array(
-				"Article.created DESC"
+			"Article" => array(
+				"limit" => 10,
+				"contain" => array("Category"),
+				"conditions" => array(
+					"Article.category_id <>" => $faq_cat["Category"]["id"]
+				),
+				"order" => array(
+					"Article.created DESC"
+				),
 			),
 		);
 		

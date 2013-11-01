@@ -154,7 +154,7 @@ class ArticlesController extends AppController {
 		$faq_cat = $this->Article->Category->findByAlias("faq");
 		$this->paginate = array(
 			"Article" => array(
-				"limit" => 10,
+				"limit" => 15,
 				"contain" => array("Category"),
 				"conditions" => array(
 					"Article.category_id <>" => $faq_cat["Category"]["id"]
@@ -223,7 +223,7 @@ class ArticlesController extends AppController {
 				}
 			}
 			$this->Session->setFlash("文章已修改!");
-			$this->redirect("/edit/".$id);
+			$this->redirect("/articles/edit/".$id);
 		}
 		
 	}

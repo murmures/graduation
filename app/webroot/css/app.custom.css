@@ -49,6 +49,11 @@ div.article-tag {
 	text-align: center;
 }
 
+div.paginator {
+	text-align: right;
+	font-size: 90%;
+}
+
 #tags ul {
 	margin:1em 0;
 	padding:.5em 10px;

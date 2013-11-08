@@ -5,5 +5,5 @@
 			<li class="font12"><span><a href="<?php echo $this->Html->url("/articles/view/{$faq['Article']['id']}");?>"><?php echo $faq['Article']['title'];?></a></span></li>
 		<?php endforeach; ?>
 	</ul>
-	<div><a href="<?php echo $this->Html->url("/faq");?>"><span class="pull-right label label-info">更多</span></a></div>
+	<div><a href="<?php echo $this->Html->url("/articles/faq");?>"><span class="pull-right label label-info">更多</span></a></div>
 </div>

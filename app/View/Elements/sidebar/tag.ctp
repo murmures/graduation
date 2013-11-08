@@ -15,7 +15,9 @@
 					$class = "tag5";
 				} 
 			?>
-			<li class="<?php echo $class;?>"><a href="<?php echo $this->Html->url("/articles/tag/{$tag["Tag"]["id"]}");?>"><?php echo $tag["Tag"]["title"];?></a></li> 
+			<?php if ($tag["Tag"]["count"] > 0):?>
+				<li class="<?php echo $class;?>"><a href="<?php echo $this->Html->url("/articles/tag/{$tag["Tag"]["id"]}");?>"><?php echo $tag["Tag"]["title"];?></a></li> 
+			<?php endif;?>
 		<?php endforeach; ?>
 	</ul>
 </div>

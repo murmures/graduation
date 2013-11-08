@@ -245,16 +245,20 @@ class ArticlesController extends AppController {
 	
 	function search() {
 		if (!empty($this->params->query["keyword"])) {
-			$articles = $this->Article->find('all', 
-				array(
+			$this->paginate = array(
+				"Article" => array(
+					"limit" => 15,
 					"contain" => array("Category"),
 					"conditions" => array(
 						"Article.title LIKE" => "%".$this->params->query["keyword"]."%"
 					),
 					"order" => array(
 						"Article.created DESC"
-					)
-			));
+					),
+				),
+			);
+			
+			$articles = $this->paginate("Article");
 			$this->set(compact('articles'));
 		}
 	}
@@ -270,47 +274,59 @@ class ArticlesController extends AppController {
 			foreach ($articles_tags as $articles_tag) {
 				$article_ids[] = $articles_tag["ArticlesTag"]["article_id"];
 			}
-			$articles = $this->Article->find('all', 
-				array(
+			$this->paginate = array(
+				"Article" => array(
+					"limit" => 15,
 					"contain" => array("Category"),
 					"conditions" => array(
 						"Article.id" => $article_ids
 					),
 					"order" => array(
 						"Article.created DESC"
-					)
-			));
+					),
+				),
+			);
+			
+			$articles = $this->paginate("Article");
 			$this->set(compact('articles'));
 		}
 	}
 	
 	function notification() {
 		$cat = $this->Article->Category->findByAlias('notification');
-		$articles = $this->Article->find('all', 
-			array(
+		$this->paginate = array(
+			"Article" => array(
+				"limit" => 15,
 				"contain" => array("Category"),
 				"conditions" => array(
 					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
 					"Article.created DESC"
-				)
-		));
+				),
+			),
+		);
+		
+		$articles = $this->paginate("Article");
 		$this->set(compact('articles'));
 	}
 	
 	function task() {
 		$cat = $this->Article->Category->findByAlias('task');
-		$articles = $this->Article->find('all', 
-			array(
+		$this->paginate = array(
+			"Article" => array(
+				"limit" => 15,
 				"contain" => array("Category"),
 				"conditions" => array(
 					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
 					"Article.created DESC"
-				)
-		));
+				),
+			),
+		);
+		
+		$articles = $this->paginate("Article");
 		$this->set(compact('articles'));
 	}
 	
@@ -329,16 +345,20 @@ class ArticlesController extends AppController {
 						foreach ($cats as $cat) {
 							$cat_ids[] = $cat['Category']['id'];
 						}
-						$articles = $this->Article->find('all', 
-							array(
+						$this->paginate = array(
+							"Article" => array(
+								"limit" => 15,
 								"contain" => array("Category"),
 								"conditions" => array(
 									"Article.category_id" => $cat_ids
 								),
 								"order" => array(
 									"Article.created DESC"
-								)
-						));
+								),
+							),
+						);
+						
+						$articles = $this->paginate("Article");
 						$this->set(compact('articles'));
 					}
 				}
@@ -346,16 +366,20 @@ class ArticlesController extends AppController {
 			default:
 				$cat = $this->Article->Category->findByAlias($params);
 				if (!empty($cat)) {
-					$articles = $this->Article->find('all', 
-						array(
+					$this->paginate = array(
+						"Article" => array(
+							"limit" => 15,
 							"contain" => array("Category"),
 							"conditions" => array(
 								"Article.category_id" => $cat['Category']['id']
 							),
 							"order" => array(
 								"Article.created DESC"
-							)
-					));
+							),
+						),
+					);
+					
+					$articles = $this->paginate("Article");
 					$this->set(compact('articles'));
 				}
 				break;
@@ -464,21 +488,42 @@ class ArticlesController extends AppController {
 	}
 	
 	function degree() {
-		
+		$cat = $this->Article->Category->findByAlias("degree");
+		if (!empty($cat)) {
+			$this->paginate = array(
+				"Article" => array(
+					"limit" => 15,
+					"contain" => array("Category"),
+					"conditions" => array(
+						"Article.category_id" => $cat['Category']['id']
+					),
+					"order" => array(
+						"Article.created DESC"
+					),
+				),
+			);
+			
+			$articles = $this->paginate("Article");
+			$this->set(compact('articles'));
+		}
 	}
 	
 	function faq() {
 		$cat = $this->Article->Category->findByAlias('faq');
-		$articles = $this->Article->find('all', 
-			array(
+		$this->paginate = array(
+			"Article" => array(
+				"limit" => 15,
 				"contain" => array("Category"),
 				"conditions" => array(
 					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
 					"Article.created DESC"
-				)
-		));
+				),
+			),
+		);
+		
+		$articles = $this->paginate("Article");
 		$this->set(compact('articles'));
 	}
 }

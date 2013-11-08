@@ -14,11 +14,13 @@
             <ul class="dropdown-menu" style="">
               <li><a href="<?php echo $this->Html->url('/articles/guide/paper')?>">论文指导 </a></li>
               <li><a href="<?php echo $this->Html->url('/articles/guide/writing')?>">写作指导</a></li>
-              <li><a href="<?php echo $this->Html->url('/articles/guide/format')?>">格式规范</a></li>
+              <!--
+              	<li><a href="<?php echo $this->Html->url('/articles/guide/format')?>">格式规范</a></li>
+              -->
             </ul>
           </li>
           <!--
-          	<li class="<?php if ($uri == "articles-download"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/download')?>"><i class='icon-download-alt'></i> 文件下载</a></li>
+          	<li class="<?php if ($uri == "articles-download"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/articles/download')?>"><i class='icon-download-alt'></i> 文件下载</a></li>
           -->
           <li class="<?php if ($uri == "articles-lecture"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/articles/lecture')?>"><i class='icon-headphones'></i> 毕业论文讲座</a></li>
           <li class="<?php if ($uri == "articles-degree"): ?>active<?php endif; ?>"><a href="<?php echo $this->Html->url('/articles/degree')?>"><i class='icon-user'></i> 学位管理</a></li>
@@ -37,6 +39,7 @@
        				// echo $this->Form->end("Submit");
        			?>
        			<button class="btn" type="text" autocomplete="off" data-loading-text="<i class='icon-time'></i> 搜索中"><i class="icon-search"></i> 搜索</button>
+       			<?php echo $this->Form->end();?>
        		</li>
        	</ul> 	
       </div><!-- /.nav-collapse -->

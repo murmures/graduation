@@ -1,4 +1,4 @@
-<?php if (!empty($articles)):?>
+<?php if (!empty($articles) OR !empty($files)):?>
 <div class="paginator">
 <?php
 	echo $this->Paginator->prev('上一页', null, null, array('class' => 'disabled'));

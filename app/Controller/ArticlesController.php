@@ -526,4 +526,18 @@ class ArticlesController extends AppController {
 		$articles = $this->paginate("Article");
 		$this->set(compact('articles'));
 	}
+	
+	function files() {
+		$this->paginate = array(
+			"File" => array(
+				"limit" => 15,
+				"order" => array(
+					"File.created DESC"
+				),
+			),
+		);
+		
+		$files = $this->paginate("File");
+		$this->set(compact('files'));
+	}
 }

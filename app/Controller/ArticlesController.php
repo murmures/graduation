@@ -20,7 +20,7 @@ class ArticlesController extends AppController {
 					"Article.category_id" => $cat["Category"]["id"]
 				),
 				"order" => array(
-					"Article.created DESC"
+					"Article.created" => "DESC"
 				),
 				"limit" => 4
 		));
@@ -65,7 +65,7 @@ class ArticlesController extends AppController {
 		} 
 		// echo'connent MSSQL succeed'; 
 			// $stmt=$dbh->prepare("SELECT * FROM FS_NS_BuzClass"); 
-			$stmt=$dbh->prepare("SELECT id,title,data FROM Fs_news_xygg WHERE BuzID=007 AND data >= '2012-01-01' ORDER BY data DESC"); 
+			$stmt=$dbh->prepare("SELECT id,title,data FROM Fs_news_xygg WHERE BuzID=008 AND data >= '2012-01-01' ORDER BY data DESC"); 
 			$stmt->execute(); 
 			while ($row=$stmt->fetch()) { 
 			debug($row); 
@@ -128,7 +128,7 @@ class ArticlesController extends AppController {
 					"Article.category_id <>" => $faq_cat["Category"]["id"]
 				),
 				"order" => array(
-					"Article.created DESC"
+					"Article.created" => "DESC"
 				),
 			);
 			
@@ -141,7 +141,7 @@ class ArticlesController extends AppController {
 						"Article.category_id <>" => $faq_cat["Category"]["id"]
 					),
 					"order" => array(
-						"Article.created DESC"
+						"Article.created" => "DESC"
 					),
 					"limit" => 10
 			));
@@ -160,7 +160,7 @@ class ArticlesController extends AppController {
 					"Article.category_id <>" => $faq_cat["Category"]["id"]
 				),
 				"order" => array(
-					"Article.created DESC"
+					"Article.created" => "DESC"
 				),
 			),
 		);
@@ -253,7 +253,7 @@ class ArticlesController extends AppController {
 						"Article.title LIKE" => "%".$this->params->query["keyword"]."%"
 					),
 					"order" => array(
-						"Article.created DESC"
+						"Article.created" => "DESC"
 					),
 				),
 			);
@@ -282,7 +282,7 @@ class ArticlesController extends AppController {
 						"Article.id" => $article_ids
 					),
 					"order" => array(
-						"Article.created DESC"
+						"Article.created" => "DESC"
 					),
 				),
 			);
@@ -302,7 +302,7 @@ class ArticlesController extends AppController {
 					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
-					"Article.created DESC"
+					"Article.created" => "DESC"
 				),
 			),
 		);
@@ -321,7 +321,7 @@ class ArticlesController extends AppController {
 					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
-					"Article.created DESC"
+					"Article.created" => "DESC"
 				),
 			),
 		);
@@ -353,7 +353,7 @@ class ArticlesController extends AppController {
 									"Article.category_id" => $cat_ids
 								),
 								"order" => array(
-									"Article.created DESC"
+									"Article.created" => "DESC"
 								),
 							),
 						);
@@ -374,7 +374,7 @@ class ArticlesController extends AppController {
 								"Article.category_id" => $cat['Category']['id']
 							),
 							"order" => array(
-								"Article.created DESC"
+								"Article.created" => "DESC"
 							),
 						),
 					);
@@ -498,7 +498,7 @@ class ArticlesController extends AppController {
 						"Article.category_id" => $cat['Category']['id']
 					),
 					"order" => array(
-						"Article.created DESC"
+						"Article.created" => "DESC"
 					),
 				),
 			);
@@ -518,7 +518,7 @@ class ArticlesController extends AppController {
 					"Article.category_id" => $cat['Category']['id']
 				),
 				"order" => array(
-					"Article.created DESC"
+					"Article.created" => "DESC"
 				),
 			),
 		);
@@ -532,7 +532,7 @@ class ArticlesController extends AppController {
 			"File" => array(
 				"limit" => 15,
 				"order" => array(
-					"File.created DESC"
+					"File.created" => "DESC"
 				),
 			),
 		);

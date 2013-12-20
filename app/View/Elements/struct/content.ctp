@@ -10,7 +10,7 @@
 				<?php else:?>
 					<span><a href="<?php echo $this->Html->url("/articles/view/{$article['Article']['id']}");?>">
 				<?php endif;?>
-					[<?php echo $article['Category']['name']; ?>]<?php echo $this->Text->truncate($article['Article']['title'], 33); ?></a></span></td><td class="text-right"><?php echo date("Y-m-d", strtotime($article['Article']['modified'])); ?></td></tr>
+					[<?php echo $article['Category']['name']; ?>]<?php echo $this->Text->truncate($article['Article']['title'], 33); ?></a></span></td><td class="text-right"><?php echo date("Y-m-d", strtotime($article['Article']['created'])); ?></td></tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>

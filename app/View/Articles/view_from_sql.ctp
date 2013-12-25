@@ -12,4 +12,4 @@
 ?>
 </div>
 <br />
-<div class="font13 indent"><?php echo $article["Article"]["body"]; ?></div>
+<div class="font13"><?php echo $article["Article"]["body"]; ?></div>

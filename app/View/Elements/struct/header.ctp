@@ -12,7 +12,7 @@
           <li class="dropdown <?php if ($uri == "articles-guide"): ?>active<?php endif; ?>">
             <a href="<?php echo $this->Html->url('/articles/guide')?>" class="dropdown-toggle" style="" data-toggle="dropdown"><i class='icon-pencil'></i> 毕业论文指导 <b class="caret"></b></a>
             <ul class="dropdown-menu" style="">
-              <li><a href="<?php echo $this->Html->url('/articles/guide/paper')?>">论文指导 </a></li>
+              <li><a href="<?php echo $this->Html->url('/articles/guide/paper')?>">选题指导 </a></li>
               <li><a href="<?php echo $this->Html->url('/articles/guide/writing')?>">写作指导</a></li>
               <!--
               	<li><a href="<?php echo $this->Html->url('/articles/guide/format')?>">格式规范</a></li>

@@ -243,6 +243,29 @@ class ArticlesController extends AppController {
 		$this->set(compact('article'));
 	}
 	
+	function view_from_sql($id) {
+		$article = $this->Article->findById($id);
+		try { 
+			$hostname='202.197.55.19';//注意,这里和上面不同,要直接用IP地址或主机名 
+			$port=1433;//端口 
+			$dbname="Cne_edu";//库名 
+			$username="mis_lzl";//用户 
+			$pw="CSU_mis_lzl47894892";//密码 
+			$dbh= new PDO("dblib:host=$hostname:$port;dbname=$dbname", "$username", "$pw"); 
+		} catch (PDOException $e) { 
+			echo"Failed to get DB handle: ".$e->getMessage() ."\n"; 
+			exit; 
+		}
+		
+		$stmt=$dbh->prepare("SELECT id,title,news,data FROM Fs_news_xygg WHERE id={$article['Article']['external_id']}"); 
+		$stmt->execute();
+		while ($row = $stmt->fetch()) {
+			$article["Article"]["body"] = $row["news"];
+			// debug($article);
+		}
+		$this->set(compact('article'));
+	}
+	
 	function search() {
 		if (!empty($this->params->query["keyword"])) {
 			$this->paginate = array(
